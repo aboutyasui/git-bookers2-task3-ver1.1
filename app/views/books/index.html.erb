@@ -1,0 +1,39 @@
+<div class="container px-5 px-sm-0">
+<% if @book.errors.any? %>
+    <%= @book.errors.count %>errors prohibited this obj from being saved:
+     <ul>
+      <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+     <% end %>
+     </ul>
+   <% end %>
+ <div class="row">
+  <!-- sidebarの呼び出し -->
+  <div class="col-md-3">
+  <%= render 'books/sidebar', user: @user , book: @book %>
+  </div>
+  <div class="col-md-8 offset-md-1">
+   <h2>Books</h2>
+   <table class="table table-hover table-inverse"><!--タイトルや本文など今まで登録したすべての情報を表示(収納)する枠-->
+    <thead>
+     <tr>
+      <th></th>
+      <th>Title</th>
+      <th>Opinion</th>
+     </tr>
+    </thead>
+ <% @books.each do |f| %>
+ <tbody>
+  <tr>
+   <td><%= link_to user_path(f.id), class: "btn btn-secondary" do%>
+   <% end %>
+   </td><!--user image-->
+   <td><%= link_to f.title ,book_path(f.id)%></td><!--title-->
+   <td><%= f.body %></td><!--opinion-->
+  </tr>
+ </tbody>
+<% end %>
+</table>
+</div>
+</div>
+</div>

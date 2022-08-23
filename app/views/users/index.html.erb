@@ -1,0 +1,38 @@
+  <div class="container px-5 px-sm-0">
+   <% if @user.errors.any? %>
+    <%= @user.errors.count %>errors prohibited this obj from being saved:
+     <ul>
+      <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+     <% end %>
+     </ul>
+   <% end %>
+
+   <div class="row">
+   <!-- sidebarの呼び出し -->
+   <div class="col-md-3">
+     <%= render 'books/sidebar', user: @user, book: @book  %>
+    </div>
+  <div class="col-md-8 offset-md-1">
+   <h2>Users</h2>
+   <table class="table table-hover table-inverse"><!--タイトルや本文など今まで登録したすべての情報を表示(収納)する枠-->
+    <thead>
+     <tr>
+      <th>image</th>
+      <th>name</th>
+      <th></th>
+     </tr>
+    </thead>
+    <tbody>
+     <% @users.each do |f| %>
+     <tr>
+      <td><%= image_tag f.get_profile_image(100,100) %></td>
+      <td><%= f.name %></td><!--opinion-->
+      <td><%= link_to "Show", user_path(f.id) %></td><!--userのshowページにリンク-->
+     </tr>
+     <% end %>
+    </tbody>
+   </table>
+   </div>
+  </div>
+ </div>
