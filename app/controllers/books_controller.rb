@@ -1,8 +1,6 @@
 class BooksController < ApplicationController
  before_action :correct_user, only: [:edit, :update]
-  #def new
-  # @book = Book.new#新規登録用のモデルを作成
-  #end
+  #ログイン中にURLを入力すると他人が投稿した本の編集ページに遷移できないようにする
 
    # 投稿データの保存
   def create
@@ -62,7 +60,7 @@ class BooksController < ApplicationController
     params.require(:book).permit(:title, :body)
   end
 
-  def correct_user
+  def correct_user#ログイン中にURLを入力すると他人が投稿した本の編集ページに遷移できないようにする
     @book = Book.find(params[:id])
     @user = @book.user
     redirect_to(books_path) unless @user == current_user
